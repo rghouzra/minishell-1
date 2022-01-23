@@ -12,7 +12,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC)  $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC)  $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 	@echo "minishell created"
 
 $(LIBFT):
