@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 CC = cc
 
-FILES = minishell.c
+FILES = minishell.c freadline.c
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:.c=.o)
 
