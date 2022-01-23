@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 19:51:05 by ayoub            ###   ########.fr       */
+/*   Created: 2022/01/23 19:50:26 by ayoub             #+#    #+#             */
+/*   Updated: 2022/01/23 20:00:51 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "colors.h"
-# include "gc.h"
-# include <stdio.h>
+#ifndef GC_H
+# define GC_H
 # include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <stddef.h>
 
-// custom readline:
-char	*freadline(char *prompt, char *color);
+typedef struct s_gc
+{
+	void		*rubbish;
+	struct s_gc	*next;
+}	t_gc;
+
+void	collect(void *rubbish, t_gc **garbage);
+void	*gc_malloc(size_t size, t_gc **garbage);
+void	clear(t_gc **garbage);
 
 #endif
