@@ -6,7 +6,7 @@
 #    By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/07 15:46:52 by akarafi           #+#    #+#              #
-#    Updated: 2022/01/23 14:50:07 by ayoub            ###   ########.fr        #
+#    Updated: 2022/01/23 14:50:49 by ayoub            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,14 +67,15 @@ B_OBJS = $(B_SRCS:.c=.o)
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 AR = @ar -rcs
+CC = @cc
 
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
 
 bonus:$(B_OBJS) $(OBJS)
-	$(AR) $(NAME) $(B_OBJS) $(OBJS)
+	@$(AR) $(NAME) $(B_OBJS) $(OBJS)
 
 clean:
 	@$(RM) $(OBJS) $(B_OBJS)
