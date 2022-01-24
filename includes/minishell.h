@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 20:28:57 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 14:03:21 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 char	*freadline(char *prompt, char *color);
 
 // shell:
-void	shell(char **env);
+void	shell(int ac, char **av, char **env, t_gc **garbage);
 
 #endif

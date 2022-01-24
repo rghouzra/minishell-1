@@ -6,13 +6,16 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 21:34:15 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 14:22:35 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count(char *s, char c)
+/*
+	check if a string contains more than one instance of a specific char
+*/
+static int	gt_one(char *s, char c)
 {
 	int	n;
 
@@ -27,36 +30,40 @@ static int	count(char *s, char c)
 	return (n);
 }
 
+/*
+	prompt with the file name of with ~ in home like oh_my_zsh (robbyrussell theme)
+*/
 static char	*prompt(void)
 {
 	char	path[255];
 
 	if (!getcwd(path, 255))
 		return (freadline("minishell", CYAN));
-	if (!ft_strncmp(path, "/", 255))
-		return (freadline("/", CYAN));
 	if (!ft_strncmp(path, getenv("HOME"), 255))
 		return (freadline("~", CYAN));
-	if (count(path, '/') > 1)
+	if (gt_one(path, '/') > 1)
 		return (freadline(ft_strrchr(path, '/') + 1, CYAN));
 	return (freadline(path, CYAN));
 }
 
-void	shell(char **env)
+/*
+	prompt in loop and execute shell commands 
+*/
+void	shell(int ac, char **av, char **env, t_gc **garbage)
 {
 	char	*line;
 
 	(void) env;
+	(void) ac;
+	(void) av;
+	printf("%s", GREEN);
 	while (true)
 	{
-		line = prompt();
+		line = collect(prompt(), garbage);
 		if (!line)
-		{
-			rl_clear_history();
-			free(line);
 			return ;
-		}
 		add_history(line);
-		free(line);
+		//todo: execute the command
+		//todo: save exit status of last command
 	}
 }
