@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 14:22:35 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 18:07:18 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ static int	gt_one(char *s, char c)
 /*
 	prompt with the file name of with ~ in home like oh_my_zsh (robbyrussell theme)
 */
-static char	*prompt(void)
+char	*prompt(void)
 {
 	char	path[255];
 
 	if (!getcwd(path, 255))
-		return (freadline("minishell", CYAN));
+		return (ft_strdup("minishell"));
 	if (!ft_strncmp(path, getenv("HOME"), 255))
-		return (freadline("~", CYAN));
+		return (ft_strdup("~"));
 	if (gt_one(path, '/') > 1)
-		return (freadline(ft_strrchr(path, '/') + 1, CYAN));
-	return (freadline(path, CYAN));
+		return (ft_strdup(ft_strrchr(path, '/') + 1));
+	return (ft_strdup(path));
 }
 
 /*
@@ -52,6 +52,7 @@ static char	*prompt(void)
 void	shell(int ac, char **av, char **env, t_gc **garbage)
 {
 	char	*line;
+	char	*prom;
 
 	(void) env;
 	(void) ac;
@@ -59,10 +60,12 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	printf("%s", GREEN);
 	while (true)
 	{
-		line = collect(prompt(), garbage);
+		prom = collect(prompt(), garbage);
+		line = collect(freadline(prom, CYAN), garbage);
 		if (!line)
 			return ;
 		add_history(line);
+		puts(line);
 		//todo: execute the command
 		//todo: save exit status of last command
 	}
