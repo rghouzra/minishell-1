@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:48:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 13:37:44 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 13:44:30 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,5 @@ void	*collect(void *rubbish, t_gc **garbage)
 
 void	*gc_malloc(size_t size, t_gc **garbage)
 {
-	void	*ptr;
-
-	ptr = malloc(size);
-	collect(ptr, garbage);
-	return (ptr);
+	return (collect(malloc(size), garbage));
 }
