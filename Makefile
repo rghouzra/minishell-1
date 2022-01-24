@@ -5,7 +5,10 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 CC = cc
 
-FILES = minishell.c freadline.c shell.c garbage/gc.c
+PROMPT = shell.c freadline.c
+
+FILES = minishell.c garbage/gc.c\
+		$(addprefix prompt/, $(PROMPT))
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:.c=.o)
 
