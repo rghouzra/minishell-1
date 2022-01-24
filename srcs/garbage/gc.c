@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:48:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 19:59:34 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 13:37:44 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	clear(t_gc **garbage)
 	}
 }
 
-void	collect(void *rubbish, t_gc **garbage)
+void	*collect(void *rubbish, t_gc **garbage)
 {
 	t_gc	*bin;
 
 	if (!garbage)
-		return ;
+		return (NULL);
 	bin = malloc(sizeof(t_gc));
 	bin->rubbish = rubbish;
 	bin->next = (*garbage);
 	(*garbage) = bin;
+	return (rubbish);
 }
 
 void	*gc_malloc(size_t size, t_gc **garbage)

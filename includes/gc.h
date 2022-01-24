@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:50:26 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 20:00:51 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/24 13:42:42 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_gc
 	struct s_gc	*next;
 }	t_gc;
 
-void	collect(void *rubbish, t_gc **garbage);
+void	*collect(void *rubbish, t_gc **garbage);
 void	*gc_malloc(size_t size, t_gc **garbage);
 void	clear(t_gc **garbage);
 
