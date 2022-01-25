@@ -19,9 +19,10 @@ void	sigint_handler(int sig)
 
 	(void) sig;
 	bold = "\033[1m";
-	prom = prompt(); //! collect in garbage and change exit status
+	prom = prompt(); // TODO change exit status
 	printf("\n%s➜  %s%s%s%s ", RED, CYAN, bold, prom, RESET);
 	rl_replace_line("", 0);
+	free(prom);
 }
 
 void	handle_signals(void)

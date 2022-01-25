@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-char	*freadline(char *promt, char *color)
+char	*freadline(char *prompt, char *color)
 {
 	char	*bold;
 
 	bold = "\033[1m";
-	printf("➜  %s%s%s ", color, bold, promt);
+	printf("➜  %s%s%s ", color, bold, prompt);
 	return (readline(RESET));
 }

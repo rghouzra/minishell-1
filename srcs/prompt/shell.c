@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+//todo create a global variable << last exit status
+//todo env
+//todo export
+
 #include "minishell.h"
 
 /*
@@ -38,7 +43,7 @@ char	*prompt(void)
 	char	path[255];
 
 	if (!getcwd(path, 255))
-		return (ft_strdup("minishell"));
+		return (ft_strdup("deleted"));
 	if (!ft_strncmp(path, getenv("HOME"), 255))
 		return (ft_strdup("~"));
 	if (gt_one(path, '/') > 1)
