@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:15:43 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 18:10:17 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/26 17:05:13 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	sigint_handler(int sig)
 
 	(void) sig;
 	bold = "\033[1m";
-	prom = prompt(); // TODO change exit status
+	prom = prompt();
 	printf("\n%s➜  %s%s%s%s ", RED, CYAN, bold, prom, RESET);
 	rl_replace_line("", 0);
+	rl_on_new_line();
 	free(prom);
+	// TODO change exit status
 }
 
 void	handle_signals(void)
