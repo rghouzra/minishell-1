@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:05 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/27 19:22:00 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ char	*prompt(void);
 // shell:
 void	shell(int ac, char **av, char **env, t_gc **garbage);
 
+// tokinizer
+t_list	*tokenize(char *s, t_gc **garbage);
+char	*handle_quotes(char *s, t_list **tokens);
+char	*append_char(char *str, char c);
 #endif
