@@ -19,7 +19,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	@echo "minishell created"
 
 $(LIBFT):
-	@make -C libft
+	@make bonus -C libft
 
 %.o:%.c $(INC)/minishell.h
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
