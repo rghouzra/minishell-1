@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:08:09 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/27 23:04:42 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/01/27 23:18:56 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_list	*tokenize(char *s, t_gc **garbage)
 			s = special(s, &tokens, garbage);
 		if (*s == '\'' || *s == '"')
 		{
-			s = handle_quotes(s, &tokens);
+			s = handle_quotes(s, &tokens, garbage);
 			if (*s != '\'' && *s != '"')
 				return (quote_error());
 		}
