@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/27 23:18:36 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/05 21:33:34 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+// virtual env:
+typedef struct s_var
+{
+	char			*name;
+	char			*value;
+	struct s_var	*next;
+}		t_var;
+
+t_var	*create_virtual_env(char **env, t_gc	**garbage);
 
 // custom readline:
 char	*freadline(char *prompt, char *color);
