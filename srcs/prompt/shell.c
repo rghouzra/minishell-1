@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 18:07:18 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/05 21:38:54 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 //todo create a global variable << last exit status
-//todo env
-//todo export
 
 #include "minishell.h"
 
