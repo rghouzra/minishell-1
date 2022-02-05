@@ -15,14 +15,14 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC)  $(OBJS) $(LIBFT) -lreadline -o $(NAME)
+	@$(CC)  $(OBJS) $(LIBFT) -L$(shell brew --prefix readline)/lib -lreadline -o $(NAME)
 	@echo "minishell created"
 
 $(LIBFT):
 	@make bonus -C libft
 
 %.o:%.c $(INC)/minishell.h
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
+	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ -I $(INC)
 	@echo "compiling..."
 
 clean:
