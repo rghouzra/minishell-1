@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:15:43 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/26 17:05:13 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/09 22:27:34 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_tools	g_tools = {0};
 
 void	sigint_handler(int sig)
 {
@@ -24,7 +26,7 @@ void	sigint_handler(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	free(prom);
-	// TODO change exit status
+	g_tools.exit_status = 130;
 }
 
 void	handle_signals(void)

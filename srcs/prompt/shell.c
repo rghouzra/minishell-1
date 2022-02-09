@@ -6,11 +6,9 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/05 21:38:54 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/09 22:29:44 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//todo create a global variable << last exit status
 
 #include "minishell.h"
 
@@ -62,12 +60,13 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	printf("%s", GREEN);
 	while (true)
 	{
+		g_tools.exit_status = 0;
 		prom = collect(prompt(), garbage);
 		line = collect(freadline(prom, CYAN), garbage);
 		if (!line)
 			return ;
 		add_history(line);
-		puts(line);
+		printf("line: %s\nexit: %d\n", line, g_tools.exit_status);
 		//todo: execute the command
 		//todo: save exit status of last command
 	}
