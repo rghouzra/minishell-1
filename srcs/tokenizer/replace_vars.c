@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:45:31 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/10 17:08:10 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 17:34:19 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ char	*get_var_value(char **value, char *line, t_var *env, t_gc **garbage)
 		*value = collect(ft_itoa(g_tools.exit_status), garbage);
 		return (line);
 	}
+	if (!ft_isalnum(*line) && *line != '_')
+	{
+		*value = "$";
+		return (line - 1);
+	}
 	while (*line == '_' || ft_isalnum(*line))
 	{
 		name = collect(append_char(name, *line), garbage);
 		line++;
 	}
+	if (!name)
+		name = "";
 	*value = ft_getenv(name, env);
 	return (line - 1);
 }
