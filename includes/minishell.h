@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/10 16:17:40 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 16:18:16 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ void	shell(int ac, char **av, char **env, t_gc **garbage);
 t_list	*tokenize(char *s, t_gc **garbage);
 char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage);
 char	*append_char(char *str, char c);
+t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage);
+
 #endif
