@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/09 22:25:11 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 16:17:40 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_var
 }		t_var;
 
 t_var	*create_virtual_env(char **env, t_gc	**garbage);
+char	*ft_getenv(char *name, t_var *env);
 
 // custom readline:
 char	*freadline(char *prompt, char *color);

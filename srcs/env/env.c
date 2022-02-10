@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:57:17 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/05 21:41:57 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 16:16:46 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,22 @@ t_var	*create_virtual_env(char **env, t_gc	**garbage)
 	while (env[i])
 		add_variable(&v_env, env[i++], garbage);
 	return (v_env);
+}
+
+char	*ft_getenv(char *name, t_var *env)
+{
+	t_var	*var;
+	int		max;
+
+	var = env;
+	while (var)
+	{
+		max = ft_strlen(var->name);
+		if (ft_strlen(name) > max)
+			max = ft_strlen(name);
+		if (!ft_strncmp(var->name, name, max))
+			return (var->value);
+		var = var->next;
+	}
+	return ("");
 }
