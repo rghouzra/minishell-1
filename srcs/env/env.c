@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:57:17 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/10 16:16:46 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 16:48:13 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*ft_getenv(char *name, t_var *env)
 	while (var)
 	{
 		max = ft_strlen(var->name);
-		if (ft_strlen(name) > max)
+		if ((int) ft_strlen(name) > max)
 			max = ft_strlen(name);
 		if (!ft_strncmp(var->name, name, max))
 			return (var->value);
