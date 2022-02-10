@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/09 22:29:44 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 21:44:11 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (!line)
 			return ;
 		add_history(line);
-		printf("line: %s\nexit: %d\n", line, g_tools.exit_status);
+		t_list *toks = tokenize(line, garbage);
+		toks = replace_vars(toks, create_virtual_env(env, garbage), garbage);
+		for (t_list *tok = toks; tok; tok = tok->next)
+			printf("%s\n", (char *)tok->content);
 		//todo: execute the command
 		//todo: save exit status of last command
 	}

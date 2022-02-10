@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:08:09 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/10 13:23:47 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 21:45:40 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ t_list	*tokenize(char *s, t_gc **garbage)
 	while (*s)
 	{
 		if ((!tokens || is_space(*s)) && (*(s + 1) && !is_space(*(s + 1))))
-			ft_lstadd_back(&tokens, collect(ft_lstnew(NULL), garbage));
+			ft_lstadd_back(&tokens, collect(ft_lstnew(""), garbage));
 		while (*s == '|' || is_redirection(s))
 			s = special(s, &tokens, garbage);
+		token = ft_lstlast(tokens);
 		if (*s == '\'' || *s == '"')
 		{
 			s = handle_quotes(s, &tokens, garbage);
@@ -76,10 +77,7 @@ t_list	*tokenize(char *s, t_gc **garbage)
 				return (quote_error());
 		}
 		else if (tokens && !is_space(*s))
-		{
-			token = ft_lstlast(tokens);
 			token->content = collect(append_char(token->content, *s), garbage);
-		}
 		s++;
 	}
 	return (tokens);

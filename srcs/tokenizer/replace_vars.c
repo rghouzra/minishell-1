@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_vars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:45:31 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/10 17:34:19 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/10 21:33:18 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ char	*get_var_value(char **value, char *line, t_var *env, t_gc **garbage)
 	if (!ft_isalnum(*line) && *line != '_')
 	{
 		*value = "$";
-		return (line - 1);
+		if (*line != -1)
+			return (line - 1);
+		return (line);
 	}
 	while (*line == '_' || ft_isalnum(*line))
 	{

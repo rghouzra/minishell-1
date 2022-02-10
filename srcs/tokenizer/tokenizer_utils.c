@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:19:49 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/27 23:18:13 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/10 21:20:42 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,39 @@ char	*append_char(char *str, char c)
 	return (tmp);
 }
 
+static void	sub_handle_quotes(t_list *token, char *s, char c)
+{
+	if (*(s + 1) == '\\')
+		token->content = append_char(token->content, '\\');
+	else if (*(s + 1) == c)
+		token->content = append_char(token->content, c);
+	else
+	{
+		token->content = append_char(token->content, *s);
+		token->content = append_char(token->content, *(s + 1));
+	}
+}
+
 char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage)
 {
 	t_list	*token;
 	char	c;
 
 	c = *(s++);
+	token = ft_lstlast(*tokens);
 	while (*s && *s != c)
 	{
-		token = ft_lstlast(*tokens);
 		if (*s == '\\' && c == '"' && *(s + 1))
 		{
-			if (*(s + 1) == '\\')
-				token->content = append_char(token->content, '\\');
-			else if (*(s + 1) == c)
-				token->content = append_char(token->content, c);
-			else
-			{
-				token->content = append_char(token->content, *s);
-				token->content = append_char(token->content, *(s + 1));
-			}
+			sub_handle_quotes(token, s, c);
 			s += 2;
 		}
 		else if (*s != c)
+		{
 			token->content = append_char(token->content, *(s++));
+			if (c == '\'' && *(s - 1) == '$')
+				token->content = append_char(token->content, -1);
+		}
 		collect(token->content, garbage);
 	}
 	return (s);
