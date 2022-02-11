@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:19:49 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/10 21:20:42 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/11 20:48:31 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage)
 
 	c = *(s++);
 	token = ft_lstlast(*tokens);
+	if (*s == c)
+		token->content = "";
 	while (*s && *s != c)
 	{
 		if (*s == '\\' && c == '"' && *(s + 1))

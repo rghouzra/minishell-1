@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:08:09 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/28 15:41:13 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/11 23:40:19 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static char	*special(char *s, t_list **tokens, t_gc **garbage)
 			last_token->content = \
 				collect(append_char(last_token->content, *(s + i)), garbage);
 	}
-	ft_lstadd_back(tokens, collect(ft_lstnew(NULL), garbage));
+	if (*(s + n) && *(s + n + 1) != ' ' && *(s + n + 1))
+		ft_lstadd_back(tokens, collect(ft_lstnew(NULL), garbage));
 	s += n;
 	return (s);
 }
@@ -63,12 +64,15 @@ t_list	*tokenize(char *s, t_gc **garbage)
 	t_list	*token;
 
 	tokens = NULL;
+	if (ft_strlen(s) == 1)
+		ft_lstadd_back(&tokens, collect(ft_lstnew(NULL), garbage));
 	while (*s)
 	{
 		if ((!tokens || is_space(*s)) && (*(s + 1) && !is_space(*(s + 1))))
 			ft_lstadd_back(&tokens, collect(ft_lstnew(NULL), garbage));
-		while (*s == ';' || *s == '|' || is_redirection(s))
+		while (*s == '|' || is_redirection(s))
 			s = special(s, &tokens, garbage);
+		token = ft_lstlast(tokens);
 		if (*s == '\'' || *s == '"')
 		{
 			s = handle_quotes(s, &tokens, garbage);
@@ -76,10 +80,7 @@ t_list	*tokenize(char *s, t_gc **garbage)
 				return (quote_error());
 		}
 		else if (tokens && !is_space(*s))
-		{
-			token = ft_lstlast(tokens);
 			token->content = collect(append_char(token->content, *s), garbage);
-		}
 		s++;
 	}
 	return (tokens);
