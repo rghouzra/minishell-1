@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 22:56:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/11 15:18:49 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/11 22:55:11 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_token	*create_token(char *content, t_gc **garbage)
 	else if (!ft_strncmp("<<", content, 255))
 		token->type = HEREDOC;
 	else if (!ft_strncmp("<", content, 255))
-		token->type = REDIRECTION_OUT;
+		token->type = REDIRECTION_IN;
 	return (token);
 }
 
@@ -68,9 +68,7 @@ t_token	*lexer(t_list	*toks, t_gc **garbage)
 	while (toks)
 	{
 		token = create_token(toks->content, garbage);
-		puts("befaure segfault in");
 		append_token(&tokens, token);
-		puts("befaure segfault out");
 		toks = toks->next;
 	}
 	return (tokens);
