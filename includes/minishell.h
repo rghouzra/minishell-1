@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/10 16:18:16 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/11 14:46:37 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,23 @@ t_list	*tokenize(char *s, t_gc **garbage);
 char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage);
 char	*append_char(char *str, char c);
 t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage);
+
+// lexer
+
+# define WORD 1U
+# define PIPE 2U
+# define REDIRECTION_IN 4U
+# define REDIRECTION_OUT 8U
+# define APPEND 16U
+# define HEREDOC 32U
+
+typedef struct s_token
+{
+	char			*content;
+	unsigned int	type;
+	struct s_token	*next;
+}		t_token;
+
+t_token	*lexer(t_list	*toks, t_gc **garbage);
 
 #endif

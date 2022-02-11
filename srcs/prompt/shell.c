@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/10 21:44:11 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/11 14:51:02 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,24 @@ char	*prompt(void)
 	return (ft_strdup(path));
 }
 
+// test
+char	*get_type(unsigned int type)
+{
+	if (type == PIPE)
+		return ("pipe");
+	if (type == REDIRECTION_IN)
+		return ("input redirection");
+	if (type == REDIRECTION_OUT)
+		return ("output redirection");
+	if (type == HEREDOC)
+		return ("heredoc");
+	if (type == APPEND)
+		return ("append");
+	if (type == WORD)
+		return ("word");
+	return (NULL);
+}
+
 /*
 	prompt in loop and execute shell commands 
 */
@@ -66,10 +84,11 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (!line)
 			return ;
 		add_history(line);
-		t_list *toks = tokenize(line, garbage);
-		toks = replace_vars(toks, create_virtual_env(env, garbage), garbage);
-		for (t_list *tok = toks; tok; tok = tok->next)
-			printf("%s\n", (char *)tok->content);
+		t_list *tok = tokenize(line, garbage);
+		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);
+		t_token *toks = lexer(tok, garbage);
+		for (t_token *tok = toks; tok; tok = tok->next)
+			printf("%s: %s\n", get_type(tok->type), tok->content);
 		//todo: execute the command
 		//todo: save exit status of last command
 	}
