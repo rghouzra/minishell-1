@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:08:09 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/11 23:40:19 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/12 04:13:01 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*special(char *s, t_list **tokens, t_gc **garbage)
 			last_token->content = \
 				collect(append_char(last_token->content, *(s + i)), garbage);
 	}
-	if (*(s + n) && *(s + n + 1) != ' ' && *(s + n + 1))
+	if (*(s + n) && !is_space(*(s + n + 1)) && *(s + n + 1))
 		ft_lstadd_back(tokens, collect(ft_lstnew(NULL), garbage));
 	s += n;
 	return (s);
@@ -64,7 +64,7 @@ t_list	*tokenize(char *s, t_gc **garbage)
 	t_list	*token;
 
 	tokens = NULL;
-	if (ft_strlen(s) == 1)
+	if (!is_space(*s))
 		ft_lstadd_back(&tokens, collect(ft_lstnew(NULL), garbage));
 	while (*s)
 	{
