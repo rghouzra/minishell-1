@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/11 20:03:35 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/12 16:23:41 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 			return ;
 		add_history(line);
 		t_list *tok = tokenize(line, garbage);
-		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);
+		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);\
 		t_token *toks = lexer(tok, garbage);
 		for (t_token *tok = toks; tok; tok = tok->next)
 			printf("%s: %s\n", get_type(tok->type), tok->content);

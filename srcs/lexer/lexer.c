@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 22:56:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/11 22:55:11 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/12 16:28:54 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_token	*get_token(char *content, t_gc	**garbage)
 	token->type = WORD;
 	token->next = NULL;
 	return (token);
-
 }
 
 static void	append_token(t_token **tokens, t_token *token)
@@ -67,8 +66,11 @@ t_token	*lexer(t_list	*toks, t_gc **garbage)
 	tokens = NULL;
 	while (toks)
 	{
-		token = create_token(toks->content, garbage);
-		append_token(&tokens, token);
+		if (toks->content)
+		{
+			token = create_token(toks->content, garbage);
+			append_token(&tokens, token);
+		}
 		toks = toks->next;
 	}
 	return (tokens);
