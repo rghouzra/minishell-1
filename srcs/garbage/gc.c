@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:48:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/24 13:44:30 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/13 20:00:05 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
+#include <stdio.h>
 
 void	clear(t_gc **garbage)
 {
@@ -25,13 +26,24 @@ void	clear(t_gc **garbage)
 	}
 }
 
+static void	allocaiton_error(t_gc **garbage)
+{
+	printf("allcation error\n");
+	clear(garbage);
+	exit(0);
+}
+
 void	*collect(void *rubbish, t_gc **garbage)
 {
 	t_gc	*bin;
 
 	if (!garbage)
 		return (NULL);
+	if (!rubbish)
+		allocaiton_error(garbage);
 	bin = malloc(sizeof(t_gc));
+	if (!bin)
+		allocaiton_error(garbage);
 	bin->rubbish = rubbish;
 	bin->next = (*garbage);
 	(*garbage) = bin;
