@@ -80,9 +80,10 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	{
 		g_tools.exit_status = 0;
 		prom = collect(prompt(), garbage);
-		line = collect(freadline(prom, CYAN), garbage);
+		line = freadline(prom, CYAN);
 		if (!line)
 			return ;
+		collect(line, garbage);
 		add_history(line);
 		t_list *tok = tokenize(line, garbage);
 		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);\

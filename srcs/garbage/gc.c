@@ -28,7 +28,7 @@ void	clear(t_gc **garbage)
 
 static void	allocaiton_error(t_gc **garbage)
 {
-	printf("allcation error\n");
+	perror("Error");
 	clear(garbage);
 	exit(0);
 }
