@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/11 14:46:37 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/19 21:30:55 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,10 @@ typedef struct s_token
 }		t_token;
 
 t_token	*lexer(t_list	*toks, t_gc **garbage);
+
+// parser:
+# define SYNTAX_ERR "minishell: syntax error near unexpected token"
+
+bool	check_errors(t_token *tok);
 
 #endif
