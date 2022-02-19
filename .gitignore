@@ -1,0 +1,8 @@
+# object files:
+*.o
+
+# libft library:
+*.a
+
+# executable
+minishell
