@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/19 21:29:17 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/20 15:48:48 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,23 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	(void) env;
 	(void) ac;
 	(void) av;
-	printf("%s", GREEN);
 	while (true)
 	{
-		g_tools.exit_status = 0;
 		prom = collect(prompt(), garbage);
-		line = freadline(prom, CYAN);
+		line = freadline(prom, CYAN, garbage);
 		if (!line)
 			return ;
 		collect(line, garbage);
 		add_history(line);
 		t_list *tok = tokenize(line, garbage);
-		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);\
+		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);
 		t_token *toks = lexer(tok, garbage);
 		bool no_error = !check_errors(toks);
 		for (t_token *tok = toks; tok && no_error; tok = tok->next)
 			printf("%s: %s\n", get_type(tok->type), tok->content);
+		g_tools.exit_status = 0;
+		if (!no_error)
+			g_tools.exit_status = 258;
 		//todo: execute the command
 		//todo: save exit status of last command
 	}

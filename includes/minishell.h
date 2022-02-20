@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/19 21:30:55 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/20 14:46:35 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_var	*create_virtual_env(char **env, t_gc	**garbage);
 char	*ft_getenv(char *name, t_var *env);
 
 // custom readline:
-char	*freadline(char *prompt, char *color);
+char	*freadline(char *prompt, char *color, t_gc **garbage);
 char	*prompt(void);
 
 // shell:

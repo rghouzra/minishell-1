@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   freadline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:20:08 by ayoub             #+#    #+#             */
-/*   Updated: 2022/01/23 21:24:16 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/20 15:02:32 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*freadline(char *prompt, char *color)
+char	*freadline(char *prompt, char *color, t_gc **garbage)
 {
-	char	*bold;
+	char	*prom;
+	char	*arrow;
 
-	bold = "\033[1m";
-	printf("➜  %s%s%s ", color, bold, prompt);
-	return (readline(RESET));
+	if (g_tools.exit_status != 0)
+		arrow = RED;
+	else
+		arrow = GREEN;
+	prom = collect(ft_strjoin(arrow, "➜  "), garbage);
+	prom = collect(ft_strjoin(prom, color), garbage);
+	prom = collect(ft_strjoin(prom, "\033[1m"), garbage);
+	prom = collect(ft_strjoin(prom, prompt), garbage);
+	prom = collect(ft_strjoin(prom, " "), garbage);
+	prom = collect(ft_strjoin(prom, RESET), garbage);
+	return (readline(prom));
 }
