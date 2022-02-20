@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/20 14:46:35 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/20 21:27:28 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,8 @@ t_token	*lexer(t_list	*toks, t_gc **garbage);
 # define SYNTAX_ERR "minishell: syntax error near unexpected token"
 
 bool	check_errors(t_token *tok);
+
+// builtin commands:
+void	env_cmd(char **cmd_list, t_var *env);
 
 #endif
