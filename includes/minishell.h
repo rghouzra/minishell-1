@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/02/20 21:27:28 by akarafi          ###   ########.fr       */
+=======
+/*   Updated: 2022/02/20 20:34:19 by aklaikel         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +84,6 @@ bool	check_errors(t_token *tok);
 
 // builtin commands:
 void	env_cmd(char **cmd_list, t_var *env);
+void	pwd_cmd(char **cmd_list);
 
 #endif

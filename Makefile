@@ -10,12 +10,14 @@ TOKENIZER = replace_vars.c tokenizer.c tokenizer_utils.c
 LEXER = lexer.c
 PROMPT = shell.c freadline.c
 PARSER = check_error.c
+BUILTIN = pwd_cmd.c env_cmd.c
 
 FILES = minishell.c garbage/gc.c\
 		$(addprefix prompt/, $(PROMPT))\
 		$(addprefix tokenizer/, $(TOKENIZER))\
 		$(addprefix lexer/, $(LEXER))\
 		$(addprefix parser/, $(PARSER))\
+		$(addprefix builtin_cmds/, $(BUILTIN))\
 		$(addprefix env/, $(ENV))
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:.c=.o)
