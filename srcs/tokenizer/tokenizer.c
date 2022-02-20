@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:08:09 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/12 04:13:01 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/20 01:02:53 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ t_list	*tokenize(char *s, t_gc **garbage)
 		}
 		else if (tokens && !is_space(*s))
 			token->content = collect(append_char(token->content, *s), garbage);
-		s++;
+		if (*s)
+			s++;
 	}
 	return (tokens);
 }
