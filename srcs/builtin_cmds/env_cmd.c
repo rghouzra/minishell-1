@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:10:02 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/20 23:01:11 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/21 21:32:41 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	env_cmd(char **cmd_list, t_var *env)
 	}
 	while (var)
 	{
-		printf("%s=%s\n", var->name, var->value);
+		if (var->value)
+			printf("%s=%s\n", var->name, var->value);
 		var = var->next;
 	}
 }
