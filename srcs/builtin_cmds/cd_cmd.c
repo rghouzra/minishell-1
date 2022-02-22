@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:10:02 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/21 02:37:39 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:51:43 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	cd_cmd(char **cmd_list)
 {
-	char	**cwd;
 	int		ret;
 
 	if (!cmd_list || !*cmd_list || ft_strncmp(cmd_list[0], "cd", 255))

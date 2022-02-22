@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:30:18 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/22 02:06:12 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/22 17:52:10 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	append_to_env(char **tab, bool append, \
 	t_var **v_env, t_gc **garbage)
 {
 	t_var	*var;
-	t_var	*head;
 
 	if (!v_env)
 		return ;
@@ -89,7 +88,6 @@ static int	append_var(char *line, t_var **env, t_gc **garbage)
 
 void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage)
 {
-	t_var	*var;
 	int		i;
 
 	if (!env || !cmd_list \

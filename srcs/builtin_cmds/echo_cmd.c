@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:10:02 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/22 02:46:35 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:51:54 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	print_words(char **words)
 void	echo_cmd(char **cmd_list)
 {
 	int		i;
-	int		j;
 	bool	is_set;
 
 	if (!cmd_list || !*cmd_list || ft_strncmp(cmd_list[0], "echo", 255))
