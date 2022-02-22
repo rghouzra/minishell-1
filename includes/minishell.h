@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/22 01:46:41 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/22 04:57:05 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ bool	check_errors(t_token *tok);
 void	env_cmd(char **cmd_list, t_var *env);
 void	pwd_cmd(char **cmd_list);
 void	unset_cmd(char **cmd_list, t_var **env);
+void	cd_cmd(char **cmd_list);
+void	echo_cmd(char **cmd_list);
+void	exit_cmd(char **cmd_list, t_gc **garbage);
+void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage);
 
 // utils:
 void	add_back(t_var **lst, t_var *new);
