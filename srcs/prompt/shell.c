@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 03:13:16 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 16:10:10 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,31 @@ char	*get_type(unsigned int type)
 	return ("none");
 }
 
+void	printf_cmds(t_cmd *cmd)
+{
+	char **cmd_list;
+	while (cmd)
+	{
+		cmd_list = cmd->cmd_list;
+		if (!cmd_list || !cmd_list[0])
+			printf("no command found\n");
+		else
+		{
+			for (int i = 0; cmd_list[i]; i++)
+				printf("%s ", cmd_list[i]);
+			printf("\n");
+		}
+		for (t_red *red = cmd->red; red; red = red->next)
+		{
+			printf("red type: %s\n", get_type(red->type));
+			printf("red file: %s\n", red->file);
+			printf("red fd: %d\n", red->fd);
+		}
+		printf("\n");
+		cmd = cmd->next;
+	}
+}
+
 /*
 	prompt in loop and execute shell commands 
 */
@@ -91,10 +116,7 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (no_error)
 		{
 			t_cmd *cmds = parse(toks, venv, garbage);
-			for (t_cmd *cmd = cmds; cmd; cmd = cmd->next)
-				printf("cmd: %s, %s\nred: %d, %d\nnext: %p\n",
-		cmd->cmd_list[0], cmd->cmd_list[1], (bool) cmd->red, cmd->red ? cmd->red->fd : -1, 
-		cmd->next);
+			printf_cmds(cmds);
 		}
 		g_tools.exit_status = 0;
 		if (!no_error)

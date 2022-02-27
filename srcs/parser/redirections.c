@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:40:37 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/27 03:09:29 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 16:06:51 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	append_red(t_red **reds, t_red *red)
 		*reds = red;
 		return ;
 	}
-	last = red;
+	last = *reds;
 	while (last->next)
 		last = last->next;
 	last->next = red;
