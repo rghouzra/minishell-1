@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 02:43:02 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 19:52:09 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*ft_getenv(char *name, t_var *env);
 
 // custom readline:
 char	*freadline(char *prompt, char *color, t_gc **garbage);
-char	*prompt(void);
 
 // shell:
 void	shell(int ac, char **av, char **env, t_gc **garbage);
@@ -100,7 +99,7 @@ t_red	*get_redirections(t_token *tok, t_var *env, t_gc **garbage);
 void	env_cmd(char **cmd_list, t_var *env);
 void	pwd_cmd(char **cmd_list);
 void	unset_cmd(char **cmd_list, t_var **env);
-void	cd_cmd(char **cmd_list);
+void    cd_cmd(char **cmd_list, t_var *env);
 void	echo_cmd(char **cmd_list);
 void	exit_cmd(char **cmd_list, t_gc **garbage);
 void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage);

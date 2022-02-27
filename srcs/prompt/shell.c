@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 16:10:10 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 19:52:30 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static int	gt_one(char *s, char c)
 /*
 	prompt with the file name of with ~ in home like oh_my_zsh (robbyrussell theme)
 */
-char	*prompt(void)
+char	*prompt(t_var *env)
 {
 	char	path[255];
 
 	if (!getcwd(path, 255))
 		return (ft_strdup("deleted"));
-	if (!ft_strncmp(path, getenv("HOME"), 255))
+	if (!ft_strncmp(path, ft_getenv("HOME", env), 255))
 		return (ft_strdup("~"));
 	if (gt_one(path, '/') > 1)
 		return (ft_strdup(ft_strrchr(path, '/') + 1));
@@ -103,14 +103,14 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	t_var *venv = create_virtual_env(env, garbage);
 	while (true)
 	{
-		prom = collect(prompt(), garbage);
+		prom = collect(prompt(venv), garbage);
 		line = freadline(prom, CYAN, garbage);
 		if (!line)
 			return ;
 		collect(line, garbage);
 		add_history(line);
 		t_list *tok = tokenize(line, garbage);
-		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);
+		tok = replace_vars(tok, venv, garbage);
 		t_token *toks = lexer(tok, garbage);
 		bool no_error = !check_errors(toks);
 		if (no_error)
