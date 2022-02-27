@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/22 04:57:05 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 02:43:02 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_list	*tokenize(char *s, t_gc **garbage);
 char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage);
 char	*append_char(char *str, char c);
 t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage);
+char	*shearch_and_replace(char *line, t_var *env, t_gc **garbage);
 
 // lexer
 
@@ -76,7 +77,24 @@ t_token	*lexer(t_list	*toks, t_gc **garbage);
 // parser:
 # define SYNTAX_ERR "minishell: syntax error near unexpected token"
 
+typedef struct s_red
+{
+	int				type;
+	char			*file;
+	int				fd;
+	struct s_red	*next;
+}		t_red;
+
+typedef struct s_cmd
+{
+	char			**cmd_list;
+	t_red			*red;
+	struct s_cmd	*next;
+}		t_cmd;
+
 bool	check_errors(t_token *tok);
+t_cmd	*parse(t_token *tok, t_var *env, t_gc **garbage);
+t_red	*get_redirections(t_token *tok, t_var *env, t_gc **garbage);
 
 // builtin commands:
 void	env_cmd(char **cmd_list, t_var *env);

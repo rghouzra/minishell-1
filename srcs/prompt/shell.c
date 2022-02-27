@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/20 15:48:48 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 03:13:16 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 	(void) env;
 	(void) ac;
 	(void) av;
+	t_var *venv = create_virtual_env(env, garbage);
 	while (true)
 	{
 		prom = collect(prompt(), garbage);
@@ -87,8 +88,14 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		tok = replace_vars(tok, create_virtual_env(env, garbage), garbage);
 		t_token *toks = lexer(tok, garbage);
 		bool no_error = !check_errors(toks);
-		for (t_token *tok = toks; tok && no_error; tok = tok->next)
-			printf("%s: %s\n", get_type(tok->type), tok->content);
+		if (no_error)
+		{
+			t_cmd *cmds = parse(toks, venv, garbage);
+			for (t_cmd *cmd = cmds; cmd; cmd = cmd->next)
+				printf("cmd: %s, %s\nred: %d, %d\nnext: %p\n",
+		cmd->cmd_list[0], cmd->cmd_list[1], (bool) cmd->red, cmd->red ? cmd->red->fd : -1, 
+		cmd->next);
+		}
 		g_tools.exit_status = 0;
 		if (!no_error)
 			g_tools.exit_status = 258;

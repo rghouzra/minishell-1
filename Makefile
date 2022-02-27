@@ -9,7 +9,7 @@ ENV = env.c
 TOKENIZER = replace_vars.c tokenizer.c tokenizer_utils.c
 LEXER = lexer.c
 PROMPT = shell.c freadline.c
-PARSER = check_error.c
+PARSER = check_error.c parse.c redirections.c
 BUILTIN = pwd_cmd.c env_cmd.c cd_cmd.c exit_cmd.c echo_cmd.c unset_cmd.c export_cmd.c export_utils.c
 
 FILES = minishell.c garbage/gc.c\
