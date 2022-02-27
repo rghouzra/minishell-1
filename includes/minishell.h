@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 19:52:09 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/27 19:57:04 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,15 @@ t_red	*get_redirections(t_token *tok, t_var *env, t_gc **garbage);
 void	env_cmd(char **cmd_list, t_var *env);
 void	pwd_cmd(char **cmd_list);
 void	unset_cmd(char **cmd_list, t_var **env);
-void    cd_cmd(char **cmd_list, t_var *env);
+void	cd_cmd(char **cmd_list, t_var *env);
 void	echo_cmd(char **cmd_list);
 void	exit_cmd(char **cmd_list, t_gc **garbage);
 void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage);
 
 // utils:
 void	add_back(t_var **lst, t_var *new);
+
+// execution
+char	*get_path(char *word, t_var *env, t_gc **garbage);
 
 #endif
