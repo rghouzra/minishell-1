@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:48:58 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/27 15:43:36 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/27 16:18:07 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_path(char *word, t_var *env, t_gc **garbage)
 {
-	char	**str;
+	char	**cmd;
 	char	*path;
 	int		i;
 
@@ -24,18 +24,17 @@ char	*get_path(char *word, t_var *env, t_gc **garbage)
 	if (access(word, F_OK) == 0)
 		return (word);
 	path = ft_getenv("PATH", env);
-	str = ft_split(path, ':');
-	if (!str)
+	cmd = ft_split(path, ':');
+	if (!cmd)
 		return (NULL);
-	while (str[i])
+	while (cmd[i])
 	{
-		collect(str[i], garbage);
-		str[i] = collect(append_char(str[i], '/'), garbage);
-		str[i] = collect(ft_strjoin(str[i], word), garbage);
-		if (access(str[i], F_OK) == 0)
-			return (free(str), str[i]);
+		collect(cmd[i], garbage);
+		cmd[i] = collect(append_char(cmd[i], '/'), garbage);
+		cmd[i] = collect(ft_strjoin(cmd[i], word), garbage);
+		if (access(cmd[i], F_OK) == 0)
+			return (free(cmd), cmd[i]);
 		i++;
 	}
-	return (free(str), NULL);
+	return (free(cmd), NULL);
 }
-
