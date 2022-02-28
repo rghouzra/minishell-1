@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:30:18 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/22 17:52:10 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/02/28 03:30:31 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	append_var(char *line, t_var **env, t_gc **garbage)
 	if (is_not_valid(line, i))
 	{
 		g_tools.exit_status = 1;
-		return (printf("minishell: export: `%s': not a valid identifier\n", \
+		return (err_printf("minishell: export: `%s': not a valid identifier\n", \
 		line), -1);
 	}
 	name = collect(ft_substr(line, 0, i), garbage);
@@ -102,8 +102,8 @@ void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage)
 		&& cmd_list[1][1] != '\0' && cmd_list[1][1] != '-')
 	{
 		g_tools.exit_status = 1;
-		printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
-		printf("usage: export [with no options]\n");
+		err_printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
+		err_printf("usage: export [with no options]\n");
 		return ;
 	}
 	i = 0;

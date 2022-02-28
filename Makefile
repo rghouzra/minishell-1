@@ -1,5 +1,5 @@
 NAME = minishell
-LIBFT = libft/libft.a
+LIBFT = libft/libft.a err_printf/libftprintf.a
 INC = includes
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
@@ -30,6 +30,7 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(LIBFT):
 	@make bonus -C libft
+	@make -C err_printf
 
 %.o:%.c $(INC)/minishell.h
 	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@ -I $(INC)

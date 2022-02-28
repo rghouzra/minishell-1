@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 22:30:34 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/20 22:59:43 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/28 03:31:04 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	unset_cmd(char **cmd_list, t_var **env)
 		&& cmd_list[1][1] != '\0' && cmd_list[1][1] != '-')
 	{
 		g_tools.exit_status = 1;
-		printf("%s: bad option: -%c\n", cmd_list[0], cmd_list[1][1]);
+		err_printf("%s: bad option: -%c\n", cmd_list[0], cmd_list[1][1]);
 		return ;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 19:57:04 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 03:41:42 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	export_cmd(char **cmd_list, t_var **env, t_gc **garbage);
 
 // utils:
 void	add_back(t_var **lst, t_var *new);
+int		err_printf(const char *f, ...);
 
 // execution
 char	*get_path(char *word, t_var *env, t_gc **garbage);

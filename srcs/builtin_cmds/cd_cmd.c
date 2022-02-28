@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:10:02 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/27 15:43:21 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 03:37:26 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,25 @@ static char	*cd_getenv(char *name, t_var *env)
 static void	ft_error(char **cmd_list)
 {
 	g_tools.exit_status = 1;
-	printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
-	printf("usage: cd [with no options]\n");
+	err_printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
+	err_printf("usage: cd [with no options]\n");
 	return ;
 }
 
 static void	ft_error_home(void)
 {
 	g_tools.exit_status = 1;
-	printf("minishell: cd: HOME not set");
+	err_printf("minishell: cd: HOME not set");
+}
+
+static int	change_dir(char *path)
+{
+	char	str[1024];
+
+	if (!ft_strncmp(path, ".", 255) && !getcwd(str, 1024))
+		perror("cd: error retrieving current directory: \
+getcwd: cannot access parent directories");
+	return (chdir(path));
 }
 
 void	cd_cmd(char **cmd_list, t_var *env)
@@ -62,7 +72,7 @@ void	cd_cmd(char **cmd_list, t_var *env)
 		ret = chdir(path);
 	}
 	else
-		ret = chdir(cmd_list[1]);
+		ret = change_dir(cmd_list[1]);
 	if (ret < 0)
 	{
 		perror("cd");

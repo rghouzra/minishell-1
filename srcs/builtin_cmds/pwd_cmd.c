@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 17:18:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/21 03:09:36 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 03:30:45 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	pwd_cmd(char **cmd_list)
 		&& cmd_list[1][1] != '\0' && cmd_list[1][1] != '-')
 	{
 		g_tools.exit_status = 1;
-		printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
-		printf("usage: env [with no options]\n");
+		err_printf("%s: illegal option -- %c\n", cmd_list[0], cmd_list[1][1]);
+		err_printf("usage: env [with no options]\n");
 		return ;
 	}
 	if (getcwd(cwd, 1024))

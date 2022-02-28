@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 02:11:16 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/22 04:28:50 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 03:30:02 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_nbr(const char *str)
 	while (str[i] == ' ')
 		i++;
 	if (str[i])
-		return (printf("exit: %s: numeric argument required\n", str), \
+		return (err_printf("exit: %s: numeric argument required\n", str), \
 			exit(255), 255);
 	return (result * n);
 }
