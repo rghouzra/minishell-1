@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:40:37 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/27 16:06:51 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/28 03:05:25 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	heredoc(char *end, t_var *env, t_gc **garbage)
 	{
 		line = readline("heredoc> ");
 		if (!line || !ft_strncmp(line, end, 255))
-			return (close(fd[1]), fd[0]);
+			return (free(line), close(fd[1]), fd[0]);
 		collect(line, garbage);
 		line = shearch_and_replace(line, env, garbage);
 		write(fd[1], line, ft_strlen(line));
