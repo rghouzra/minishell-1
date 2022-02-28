@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:40:37 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/28 03:05:25 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/28 21:49:47 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	heredoc(char *end, t_var *env, t_gc **garbage)
 		collect(line, garbage);
 		line = shearch_and_replace(line, env, garbage);
 		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
 	}
 }
 

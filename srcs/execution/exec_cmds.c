@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:11:36 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/28 18:50:12 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 21:00:32 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int	handle_redirections(t_red *red)
 	{
 		if (__handle_redirections(red, fd) == 0)
 		{
-			err_printf("minisehll: %s", red->file);
-			perror("");
+			g_tools.exit_status = 1;
+			err_printf("minisehll: ");
+			perror(red->file);
 			return (0);
 		}
 		red = red->next;
@@ -82,7 +83,8 @@ static bool	is_builtin(char *s)
 			|| !ft_strncmp(s, "exit", 255));
 }
 
-static bool	is_builtin_cmd(char **cmd_list, t_red *red, t_var **env, t_gc **garbage)
+bool	is_builtin_cmd(char **cmd_list, \
+	t_red *red, t_var **env, t_gc **garbage)
 {
 	int	fd[2];
 
@@ -114,5 +116,10 @@ void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage)
 	if (cmd && !cmd->next \
 		&& is_builtin_cmd(cmd->cmd_list, cmd->red, env, garbage))
 		return ;
-	// execute cmds
+	exec_multiple_cmds(cmd, env, garbage);
+	while (cmd)
+	{
+		wait(NULL);
+		cmd = cmd->next;
+	}
 }

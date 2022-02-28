@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/28 18:51:28 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:40:03 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ int		err_printf(const char *f, ...);
 char	*get_path(char *word, t_var *env, t_gc **garbage);
 void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage);
 int		handle_redirections(t_red *red);
+bool	is_builtin_cmd(char **cmd_list, \
+	t_red *red, t_var **env, t_gc **garbage);
+void	exec_multiple_cmds(t_cmd *cmd, t_var **env, t_gc **garbage);
 
 #endif

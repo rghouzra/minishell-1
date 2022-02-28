@@ -11,7 +11,7 @@ LEXER = lexer.c
 PROMPT = shell.c freadline.c
 PARSER = check_error.c parse.c redirections.c
 BUILTIN = pwd_cmd.c env_cmd.c cd_cmd.c exit_cmd.c echo_cmd.c unset_cmd.c export_cmd.c export_utils.c
-EXECUTION = exec_cmds.c get_path.c
+EXECUTION = exec_cmds.c get_path.c executions_utils.c
 
 FILES = minishell.c garbage/gc.c\
 		$(addprefix prompt/, $(PROMPT))\
