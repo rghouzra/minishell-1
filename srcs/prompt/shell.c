@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/27 19:52:30 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/02/28 18:50:47 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*prompt(t_var *env)
 }
 
 // test
+
 char	*get_type(unsigned int type)
 {
 	if (type == PIPE)
@@ -116,6 +117,7 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (no_error)
 		{
 			t_cmd *cmds = parse(toks, venv, garbage);
+			exec_cmd(cmds, &venv, garbage);
 			printf_cmds(cmds);
 		}
 		g_tools.exit_status = 0;

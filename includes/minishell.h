@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/28 03:41:42 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:51:28 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <readline/readline.h>
@@ -110,5 +111,7 @@ int		err_printf(const char *f, ...);
 
 // execution
 char	*get_path(char *word, t_var *env, t_gc **garbage);
+void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage);
+int		handle_redirections(t_red *red);
 
 #endif

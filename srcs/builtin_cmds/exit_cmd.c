@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 02:11:16 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/28 04:12:11 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:43:45 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exit_cmd(char **cmd_list, t_gc **garbage)
 	if (cmd_list[2])
 	{
 		g_tools.exit_status = 1;
-		printf("minishell: exit: too many arguments");
+		printf("minishell: exit: too many arguments\n");
 	}
 	else
 	{

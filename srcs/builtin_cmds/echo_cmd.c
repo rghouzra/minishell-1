@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:10:02 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/28 03:29:02 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:43:11 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	print_words(char **words)
 	i = 0;
 	while (words[i])
 	{
-		printf("%s", words[i++]);
+		ft_putstr_fd(words[i++], 1);
 		if (words[i])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 	}
 }
 
@@ -55,5 +55,5 @@ void	echo_cmd(char **cmd_list)
 	}
 	print_words(&cmd_list[i]);
 	if (is_set)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }
