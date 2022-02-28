@@ -6,13 +6,13 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 02:11:16 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/28 03:30:02 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 04:12:11 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_nbr(const char *str)
+int	get_nbr(const char *str, t_gc **garbage)
 {
 	int		i;
 	int		n;
@@ -37,7 +37,7 @@ int	get_nbr(const char *str)
 		i++;
 	if (str[i])
 		return (err_printf("exit: %s: numeric argument required\n", str), \
-			exit(255), 255);
+			clear(garbage), exit(255), 255);
 	return (result * n);
 }
 
@@ -47,15 +47,20 @@ void	exit_cmd(char **cmd_list, t_gc **garbage)
 
 	if (!cmd_list || !*cmd_list || ft_strncmp(*cmd_list, "exit", 255))
 		return ;
-	clear(garbage);
 	if (!cmd_list[1])
+	{
+		clear(garbage);
 		exit(0);
-	status = get_nbr(cmd_list[1]);
+	}
+	status = get_nbr(cmd_list[1], garbage);
 	if (cmd_list[2])
 	{
 		g_tools.exit_status = 1;
-		printf("bash: exit: too many arguments");
+		printf("minishell: exit: too many arguments");
 	}
 	else
+	{
+		clear(garbage);
 		exit(status);
+	}
 }

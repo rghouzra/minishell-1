@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:30:18 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/28 03:30:31 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:20:40 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static void	print_export(t_var *env)
 {
 	while (env)
 	{
-		printf("declare -x %s\n", env->name);
+		printf("declare -x %s", env->name);
 		if (env->value)
-			printf("=\"%s\"\n", env->value);
+			printf("=\"%s\"", env->value);
+		printf("\n");
 		env = env->next;
 	}
 }
