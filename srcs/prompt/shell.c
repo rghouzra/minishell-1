@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/28 21:14:32 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 02:01:39 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,6 @@ char	*prompt(t_var *env)
 	return (ft_strdup(path));
 }
 
-// test
-
-char	*get_type(unsigned int type)
-{
-	if (type == PIPE)
-		return ("pipe");
-	if (type == REDIRECTION_IN)
-		return ("input redirection");
-	if (type == REDIRECTION_OUT)
-		return ("output redirection");
-	if (type == HEREDOC)
-		return ("heredoc");
-	if (type == APPEND)
-		return ("append");
-	if (type == WORD)
-		return ("word");
-	return ("none");
-}
-
-void	printf_cmds(t_cmd *cmd)
-{
-	char **cmd_list;
-	while (cmd)
-	{
-		cmd_list = cmd->cmd_list;
-		if (!cmd_list || !cmd_list[0])
-			printf("no command found\n");
-		else
-		{
-			for (int i = 0; cmd_list[i]; i++)
-				printf("%s ", cmd_list[i]);
-			printf("\n");
-		}
-		for (t_red *red = cmd->red; red; red = red->next)
-		{
-			printf("red type: %s\n", get_type(red->type));
-			printf("red file: %s\n", red->file);
-			printf("red fd: %d\n", red->fd);
-		}
-		printf("\n");
-		cmd = cmd->next;
-	}
-}
-
 /*
 	prompt in loop and execute shell commands 
 */
@@ -117,11 +73,11 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (no_error)
 		{
 			t_cmd *cmds = parse(toks, venv, garbage);
+			g_tools.exit_status = 0;
 			exec_cmd(cmds, &venv, garbage);
 			//printf_cmds(cmds);
 		}
-		g_tools.exit_status = 0;
-		if (!no_error)
+		else
 			g_tools.exit_status = 258;
 		//todo: execute the command
 		//todo: save exit status of last command

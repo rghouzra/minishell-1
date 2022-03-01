@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:11:36 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/02/28 21:00:32 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 01:40:33 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,20 @@ bool	is_builtin_cmd(char **cmd_list, \
 
 void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage)
 {
+	int	tmp_in;
+	int	status;
+
+	tmp_in = dup(0);
 	if (cmd && !cmd->next \
 		&& is_builtin_cmd(cmd->cmd_list, cmd->red, env, garbage))
 		return ;
 	exec_multiple_cmds(cmd, env, garbage);
 	while (cmd)
 	{
-		wait(NULL);
+		wait(&status);
+		g_tools.exit_status = WIFEXITED(status);
 		cmd = cmd->next;
 	}
+	g_tools.is_runing = 0;
+	dup2(tmp_in, 0);
 }

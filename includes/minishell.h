@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/28 20:40:03 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 00:39:16 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct s_tools
 {
 	int	exit_status;
+	int	is_runing;
 }	t_tools;
 
 extern t_tools	g_tools;

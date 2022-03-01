@@ -6,22 +6,24 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:15:43 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/20 14:50:38 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 01:43:39 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tools	g_tools = {0};
+t_tools	g_tools = {0, 0};
 
 void	sigint_handler(int sig)
 {
-	(void) sig;
-	g_tools.exit_status = 130;
+	g_tools.exit_status = 128 + sig;
 	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (!g_tools.is_runing)
+	{	
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	handle_signals(void)
