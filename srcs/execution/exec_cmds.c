@@ -6,14 +6,14 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:11:36 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/03/01 20:03:52 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 22:49:05 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * the builtin command:
+ * the builtin commands:
  * echo   -> write arguments to the standard output.
  * cd     -> Change the current directory to DIR.
  * pwd    -> Print the current working directory.
@@ -126,7 +126,8 @@ void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage)
 		wait(&status);
 		if (WIFSIGNALED(status))
 		{
-			g_tools.exit_status = 128 + WTERMSIG(status);
+			if (WTERMSIG(status) != 13)
+				g_tools.exit_status = 128 + WTERMSIG(status);
 			if (WTERMSIG(status) == SIGQUIT)
 				printf(" Quit\n");
 		}

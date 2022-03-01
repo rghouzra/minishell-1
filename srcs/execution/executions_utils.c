@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:16:49 by akarafi           #+#    #+#             */
-/*   Updated: 2022/03/01 20:02:17 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 22:40:15 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ static char	**get_env_as_array(t_var *env, t_gc	**garbage)
 	return (envp[++i] = NULL, envp);
 }
 
-static void	execute(t_cmd *cmd, int out, t_var **env, t_gc **garbage)
+static void	execute(t_cmd *cmd, int fd[], t_var **env, t_gc **garbage)
 {
 	char	**cmd_lst;
-	t_red	*red;
 	char	*word;
 	char	**envp;
 
 	cmd_lst = cmd->cmd_list;
-	red = cmd->red;
 	envp = get_env_as_array(*env, garbage);
 	if (cmd->next)
 	{
-		dup2(out, 1);
-		close(out);
+		dup2(fd[1], 1);
+		close(fd[1]);
+		close(fd[0]);
 	}
-	if (is_builtin_cmd(cmd_lst, red, env, garbage) || !handle_redirections(red))
+	if (is_builtin_cmd(cmd_lst, cmd->red, env, garbage) \
+		|| !handle_redirections(cmd->red))
 		exit(g_tools.exit_status);
 	if (!cmd_lst || !cmd_lst[0])
 		exit(0);
@@ -70,11 +70,11 @@ static void	execute(t_cmd *cmd, int out, t_var **env, t_gc **garbage)
 	execve(cmd_lst[0], cmd_lst, envp);
 }
 
-static void	run_cmd(t_cmd *cmd, t_var **env, int out, t_gc **garbage)
+static void	run_cmd(t_cmd *cmd, t_var **env, int fd[], t_gc **garbage)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	execute(cmd, out, env, garbage);
+	execute(cmd, fd, env, garbage);
 	perror(cmd->cmd_list[0]);
 	exit(1);
 }
@@ -93,13 +93,15 @@ void	exec_multiple_cmds(t_cmd *cmd, t_var **env, t_gc **garbage)
 		if (id < 0)
 			return (perror("fork"));
 		if (id == 0)
-			run_cmd(cmd, env, fd[1], garbage);
+			run_cmd(cmd, env, fd, garbage);
 		if (cmd->next)
 		{
 			dup2(fd[0], 0);
 			close(fd[0]);
 			close(fd[1]);
 		}
+		else
+			close(0);
 		cmd = cmd->next;
 	}
 }
