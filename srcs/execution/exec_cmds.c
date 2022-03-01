@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:11:36 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/03/01 02:58:41 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 20:03:52 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,14 @@ void	exec_cmd(t_cmd *cmd, t_var **env, t_gc **garbage)
 	while (cmd)
 	{
 		wait(&status);
-		g_tools.exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			g_tools.exit_status = 128 + WTERMSIG(status);
+			if (WTERMSIG(status) == SIGQUIT)
+				printf(" Quit\n");
+		}
+		else
+			g_tools.exit_status = WEXITSTATUS(status);
 		cmd = cmd->next;
 	}
 	g_tools.is_runing = 0;
