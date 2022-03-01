@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/01 02:01:39 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 02:53:39 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,39 @@ char	*prompt(t_var *env)
 }
 
 /*
+	go execute cmds
+*/
+void	execute_line(char *line, t_var **env, t_gc **garbage)
+{
+	t_list	*tok;
+	t_token	*toks;
+	t_cmd	*cmds;
+	bool	no_error;
+
+	tok = tokenize(line, garbage);
+	tok = replace_vars(tok, *env, garbage);
+	toks = lexer(tok, garbage);
+	no_error = !check_errors(toks);
+	if (no_error)
+	{
+		cmds = parse(toks, *env, garbage);
+		g_tools.exit_status = 0;
+		exec_cmd(cmds, env, garbage);
+	}
+	else
+		g_tools.exit_status = 258;
+}
+
+/*
 	prompt in loop and execute shell commands 
 */
-void	shell(int ac, char **av, char **env, t_gc **garbage)
+void	shell(char **env, t_gc **garbage)
 {
 	char	*line;
 	char	*prom;
+	t_var	*venv;
 
-	(void) env;
-	(void) ac;
-	(void) av;
-	t_var *venv = create_virtual_env(env, garbage);
+	venv = create_virtual_env(env, garbage);
 	while (true)
 	{
 		prom = collect(prompt(venv), garbage);
@@ -65,21 +87,8 @@ void	shell(int ac, char **av, char **env, t_gc **garbage)
 		if (!line)
 			return ;
 		collect(line, garbage);
-		add_history(line);
-		t_list *tok = tokenize(line, garbage);
-		tok = replace_vars(tok, venv, garbage);
-		t_token *toks = lexer(tok, garbage);
-		bool no_error = !check_errors(toks);
-		if (no_error)
-		{
-			t_cmd *cmds = parse(toks, venv, garbage);
-			g_tools.exit_status = 0;
-			exec_cmd(cmds, &venv, garbage);
-			//printf_cmds(cmds);
-		}
-		else
-			g_tools.exit_status = 258;
-		//todo: execute the command
-		//todo: save exit status of last command
+		if (*line && *line != ' ')
+			add_history(line);
+		execute_line(line, &venv, garbage);
 	}
 }
