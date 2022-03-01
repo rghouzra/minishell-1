@@ -17,12 +17,6 @@ void	ft_putnbr_u_fd(unsigned int n, int *len, int fd)
 	unsigned int	i;
 
 	i = n;
-	if (i < 0)
-	{
-		ft_putchar_fd('-', fd);
-		(*len)++;
-		i = -1 * i;
-	}
 	if (i <= 9)
 	{
 		ft_putchar_fd(i + 48, fd);
