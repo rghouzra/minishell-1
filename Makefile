@@ -41,11 +41,14 @@ $(LIBFT):
 clean:
 	@$(RM) $(OBJS)
 	@make clean -C libft
+	@make clean -C err_printf
 	@echo "successfuly cleaned"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@make fclean -C libft
+	@make fclean -C err_printf
 	@echo "executable removed successfuly"
 
 re: fclean all
+
