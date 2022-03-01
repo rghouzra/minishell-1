@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:16:49 by akarafi           #+#    #+#             */
-/*   Updated: 2022/03/01 02:05:04 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 02:19:16 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,18 @@ static char	**get_env_as_array(t_var *env, t_gc	**garbage)
 		env = env->next;
 	}
 	envp = gc_malloc((i + 1) * sizeof(char *), garbage);
-	i = 0;
+	i = -1;
 	while (var)
 	{
 		if (var->value)
 		{
-			envp[i] = var->name;
+			envp[++i] = var->name;
 			envp[i] = collect(append_char(envp[i], '='), garbage);
 			envp[i] = collect(ft_strjoin(envp[i], var->value), garbage);
-			i++;
 		}
 		var = var->next;
 	}
-	envp[i] = NULL;
-	return (envp);
+	return (envp[++i] = NULL, envp);
 }
 
 static void	execute(t_cmd *cmd, int out, t_var **env, t_gc **garbage)
@@ -72,6 +70,15 @@ static void	execute(t_cmd *cmd, int out, t_var **env, t_gc **garbage)
 	execve(cmd_lst[0], cmd_lst, envp);
 }
 
+static void	run_cmd(t_cmd *cmd, t_var **env, int out, t_gc **garbage)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	execute(cmd, out, env, garbage);
+	perror(cmd->cmd_list[0]);
+	exit(1);
+}
+
 void	exec_multiple_cmds(t_cmd *cmd, t_var **env, t_gc **garbage)
 {
 	int	fd[2];
@@ -86,13 +93,7 @@ void	exec_multiple_cmds(t_cmd *cmd, t_var **env, t_gc **garbage)
 		if (id < 0)
 			return (perror("fork"));
 		if (id == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			execute(cmd, fd[1], env, garbage);
-			perror(cmd->cmd_list[0]);
-			exit(1);
-		}
+			run_cmd(cmd, env, fd[1], garbage);
 		if (cmd->next)
 		{
 			dup2(fd[0], 0);
