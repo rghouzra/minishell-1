@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:15:43 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/01 01:43:39 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 02:44:38 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int	main(int ac, char **av, char **env)
 
 	handle_signals();
 	garbage = NULL;
-	shell(ac, av, env, &garbage);
+	(void) ac;
+	(void) av;
+	shell(env, &garbage);
 	rl_clear_history();
 	clear(&garbage);
 }

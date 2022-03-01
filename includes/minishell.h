@@ -6,7 +6,7 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/01 00:39:16 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/01 02:44:55 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_getenv(char *name, t_var *env);
 char	*freadline(char *prompt, char *color, t_gc **garbage);
 
 // shell:
-void	shell(int ac, char **av, char **env, t_gc **garbage);
+void	shell(char **env, t_gc **garbage);
 
 // tokinizer
 t_list	*tokenize(char *s, t_gc **garbage);
