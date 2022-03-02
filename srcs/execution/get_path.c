@@ -6,11 +6,22 @@
 /*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:48:58 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/03/02 00:23:47 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/02 01:00:59 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	check_cwd(char *word)
+{
+	if (*word == '.' && *(word + 1) == '/')
+	{
+		if (access(word, F_OK) == 0 && access(word, X_OK) != 0)
+			return (true);
+		return (false);
+	}
+	return (false);
+}
 
 char	*get_path(char *word, t_var *env, t_gc **garbage)
 {
@@ -18,8 +29,7 @@ char	*get_path(char *word, t_var *env, t_gc **garbage)
 	char	*path;
 	int		i;
 
-	i = 0;
-	if (!word || !*word || !env)
+	if (!word || !*word || !env || check_cwd(word))
 		return (NULL);
 	if (access(word, X_OK) == 0)
 		return (word);
@@ -27,14 +37,14 @@ char	*get_path(char *word, t_var *env, t_gc **garbage)
 	cmd = ft_split(path, ':');
 	if (!cmd)
 		return (NULL);
-	while (cmd[i])
+	i = -1;
+	while (cmd[++i])
 	{
 		collect(cmd[i], garbage);
 		cmd[i] = collect(append_char(cmd[i], '/'), garbage);
 		cmd[i] = collect(ft_strjoin(cmd[i], word), garbage);
 		if (access(cmd[i], X_OK) == 0)
 			return (free(cmd), cmd[i]);
-		i++;
 	}
 	return (free(cmd), NULL);
 }
