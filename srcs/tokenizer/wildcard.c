@@ -6,7 +6,7 @@
 /*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 23:56:32 by ahimmi            #+#    #+#             */
-/*   Updated: 2022/03/24 03:30:35 by ayoub            ###   ########.fr       */
+/*   Updated: 2022/03/24 03:50:00 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ static bool	match(char *wildcard, char *s)
 	return (true);
 }
 
+char	*fix(char *s, t_gc **garbage)
+{
+	char	*ret;
+
+	ret = "";
+	while (*s)
+	{
+		if (*s > 0)
+			ret = collect(append_char(ret, *s), garbage);
+		s++;
+	}
+	return (ret);
+}
+
 char	*expand_wildcard(char *wildcard, t_gc **garbage)
 {
 	struct dirent	*dir_ent;
@@ -54,20 +68,19 @@ char	*expand_wildcard(char *wildcard, t_gc **garbage)
 		return (wildcard);
 	ret = "";
 	dir = opendir(".");
-	while (true)
+	dir_ent = readdir(dir);
+	while (dir_ent)
 	{
-		dir_ent = readdir(dir);
-		if (!dir_ent)
-			break ;
 		if (dir_ent->d_name[0] != '.' && match(wildcard, dir_ent->d_name))
 		{
 			if (*ret)
 				ret = collect(append_char(ret, ' '), garbage);
 			ret = collect(ft_strjoin(ret, dir_ent->d_name), garbage);
 		}
+		dir_ent = readdir(dir);
 	}
 	closedir(dir);
 	if (!*ret)
-		return (wildcard);
+		return (fix(wildcard, garbage));
 	return (ret);
 }
