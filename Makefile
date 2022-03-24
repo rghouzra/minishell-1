@@ -6,7 +6,7 @@ RM = rm -rf
 CC = cc
 
 ENV = env.c
-TOKENIZER = replace_vars.c tokenizer.c tokenizer_utils.c
+TOKENIZER = replace_vars.c tokenizer.c tokenizer_utils.c wildcard.c
 LEXER = lexer.c
 PROMPT = shell.c freadline.c
 PARSER = check_error.c parse.c redirections.c
