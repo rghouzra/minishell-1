@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahimmi <ahimmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/01 02:44:55 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/24 00:11:56 by ahimmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -58,6 +59,7 @@ char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage);
 char	*append_char(char *str, char c);
 t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage);
 char	*shearch_and_replace(char *line, t_var *env, t_gc **garbage);
+char	*expand_wildcard(char *wildcard, t_gc **garbage);
 
 // lexer
 

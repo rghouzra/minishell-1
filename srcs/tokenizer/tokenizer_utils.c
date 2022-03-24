@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoub <ayoub@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:19:49 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/12 16:29:26 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/24 03:44:24 by ayoub            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage)
 		else if (*s != c)
 		{
 			token->content = append_char(token->content, *(s++));
-			if (c == '\'' && *(s - 1) == '$')
+			if ((c == '\'' && *(s - 1) == '$') || *(s - 1) == '*')
 				token->content = append_char(token->content, -1);
 		}
 		collect(token->content, garbage);

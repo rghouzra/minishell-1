@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_vars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahimmi <ahimmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:45:31 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/12 16:26:50 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/23 23:56:16 by ahimmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage)
 	while (tok)
 	{
 		if (tok->content)
+		{
+			tok->content = expand_wildcard(tok->content, garbage);
 			tok->content = shearch_and_replace(tok->content, env, garbage);
+		}
 		tok = tok->next;
 	}
 	return (tokens);
