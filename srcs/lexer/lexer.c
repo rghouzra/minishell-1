@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahimmi <ahimmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 22:56:13 by ayoub             #+#    #+#             */
-/*   Updated: 2022/02/12 16:28:54 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/31 03:02:31 by ahimmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token	*get_token(char *content, t_gc	**garbage)
+t_token	*get_token(char *content, t_gc	**garbage)
 {
 	t_token	*token;
 

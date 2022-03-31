@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahimmi <ahimmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 20:13:50 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/01 22:44:03 by akarafi          ###   ########.fr       */
+/*   Updated: 2022/03/31 03:38:22 by ahimmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	execute_line(char *line, t_var **env, t_gc **garbage)
 	tok = tokenize(line, garbage);
 	tok = replace_vars(tok, *env, garbage);
 	toks = lexer(tok, garbage);
+	toks = expand_all_wildcards(&toks, garbage);
 	no_error = !check_errors(toks);
 	if (no_error)
 	{

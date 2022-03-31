@@ -6,7 +6,7 @@
 /*   By: ahimmi <ahimmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:13:40 by ayoub             #+#    #+#             */
-/*   Updated: 2022/03/24 00:11:56 by ahimmi           ###   ########.fr       */
+/*   Updated: 2022/03/31 03:22:50 by ahimmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	*handle_quotes(char *s, t_list **tokens, t_gc **garbage);
 char	*append_char(char *str, char c);
 t_list	*replace_vars(t_list *tokens, t_var *env, t_gc **garbage);
 char	*shearch_and_replace(char *line, t_var *env, t_gc **garbage);
-char	*expand_wildcard(char *wildcard, t_gc **garbage);
 
 // lexer
 
@@ -78,6 +77,12 @@ typedef struct s_token
 }		t_token;
 
 t_token	*lexer(t_list	*toks, t_gc **garbage);
+t_token	*get_token(char *content, t_gc	**garbage);
+
+// wildcard:
+t_token *last_tok(t_token *lst);
+t_token	*expand_wildcard(char *wildcard, t_gc **garbage);
+t_token *expand_all_wildcards(t_token **toks, t_gc **garbage);
 
 // parser:
 # define SYNTAX_ERR "minishell: syntax error near unexpected token"
