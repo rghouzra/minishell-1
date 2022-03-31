@@ -12,9 +12,10 @@ PROMPT = shell.c freadline.c
 PARSER = check_error.c parse.c redirections.c
 BUILTIN = pwd_cmd.c env_cmd.c cd_cmd.c exit_cmd.c echo_cmd.c unset_cmd.c export_cmd.c export_utils.c
 EXECUTION = exec_cmds.c get_path.c executions_utils.c
+WILDCARD = wildcard.c norm.c
 
 FILES = minishell.c garbage/gc.c\
-		wildcard/wildcard.c\
+		$(addprefix wildcard/, $(WILDCARD))\
 		$(addprefix prompt/, $(PROMPT))\
 		$(addprefix tokenizer/, $(TOKENIZER))\
 		$(addprefix lexer/, $(LEXER))\
