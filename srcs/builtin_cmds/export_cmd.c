@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akarafi <akarafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:30:18 by akarafi           #+#    #+#             */
-/*   Updated: 2022/02/28 17:20:40 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:06:59 by akarafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ static void	append_to_env(char **tab, bool append, \
 	add_back(v_env, var);
 }
 
+static bool find(char *name, t_var *env) {
+	while (env) {
+		if (!strncmp(name, env->name, 255))
+			return true;
+		env = env->next;
+	}
+	return false;
+}
+
 static int	append_var(char *line, t_var **env, t_gc **garbage)
 {
 	char	*name;
@@ -77,7 +86,11 @@ static int	append_var(char *line, t_var **env, t_gc **garbage)
 	}
 	name = collect(ft_substr(line, 0, i), garbage);
 	if (line[i] == 0)
+	{
+		if (find(name, *env))
+			return 0;
 		value = NULL;
+	}
 	else if (line[i] == '+')
 		value = collect(ft_strdup(&line[i + 2]), garbage);
 	else
