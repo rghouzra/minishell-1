@@ -35,6 +35,7 @@ char	*get_path(char *word, t_var *env, t_gc **garbage)
 		return (word);
 	path = ft_getenv("PATH", env);
 	cmd = ft_split(path, ':');
+	collect(cmd, garbage);
 	if (!cmd)
 		return (NULL);
 	i = -1;
@@ -44,7 +45,7 @@ char	*get_path(char *word, t_var *env, t_gc **garbage)
 		cmd[i] = collect(append_char(cmd[i], '/'), garbage);
 		cmd[i] = collect(ft_strjoin(cmd[i], word), garbage);
 		if (access(cmd[i], X_OK) == 0)
-			return (free(cmd), cmd[i]);
+			return (cmd[i]);
 	}
-	return (free(cmd), NULL);
+	return (NULL);
 }
